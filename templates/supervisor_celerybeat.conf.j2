@@ -4,23 +4,23 @@
 [program:celerybeat]
 
 ; Set full path to celery program if using virtualenv
-command=/home/norcode/.virtualenvs/django1.9/bin/celery beat -A mbi --schedule /home/norcode/mbi-ticket-tracker/celerybeat.db --loglevel=INFO
+command=/srv/venv/bin/celery beat -A mbi --schedule /srv/celerybeat.db --loglevel=INFO
 
 ; The directory to your Django project
-directory=/home/norcode/mbi-ticket-tracker
+directory=/srv
 
 ; If supervisord is run as the root user, switch users to this UNIX user account
 ; before doing any processing.
-user=norcode
+user={{ celery_user_name }}
 
 ; Supervisor will start as many instances of this program as named by numprocs
 numprocs=1
 
 ; Put process stdout output in this file
-stdout_logfile=/var/log/celery/beat.log
+stdout_logfile={{ celery_log_dir }}/beat.log
 
 ; Put process stderr output in this file
-stderr_logfile=/var/log/celery/beat.log
+stderr_logfile={{ celery_log_dir }}/beat.log
 
 ; If true, this program will start automatically when supervisord is started
 autostart=true

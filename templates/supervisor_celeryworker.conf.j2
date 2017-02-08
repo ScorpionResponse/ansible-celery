@@ -5,23 +5,23 @@
 [program:celeryworker]
 
 ; Set full path to celery program if using virtualenv
-command=/home/norcode/.virtualenvs/django1.9/bin/celery worker -A mbi --loglevel=INFO
+command=/srv/venv/bin/celery worker -A mbi --loglevel=INFO
 
 ; The directory to your Django project
-directory=/home/norcode/mbi-ticket-tracker
+directory=/srv
 
 ; If supervisord is run as the root user, switch users to this UNIX user account
 ; before doing any processing.
-user=norcode
+user={{ celery_user_name }}
 
 ; Supervisor will start as many instances of this program as named by numprocs
 numprocs=1
 
 ; Put process stdout output in this file
-stdout_logfile=/var/log/celery/worker.log
+stdout_logfile={{ celery_log_dir }}/worker.log
 
 ; Put process stderr output in this file
-stderr_logfile=/var/log/celery/worker.log
+stderr_logfile={{ celery_log_dir }}/worker.log
 
 ; If true, this program will start automatically when supervisord is started
 autostart=true
@@ -39,7 +39,7 @@ startsecs=10
 
 ; Need to wait for currently executing tasks to finish at shutdown.
 ; Increase this if you have very long running tasks.
-stopwaitsecs = 600
+stopwaitsecs=600
 
 ; When resorting to send SIGKILL to the program to terminate it
 ; send SIGKILL to its whole process group instead,
