@@ -1,4 +1,5 @@
 ---
+celery_project_name: 
 
 celery_log_dir: "/var/log/celery"
 

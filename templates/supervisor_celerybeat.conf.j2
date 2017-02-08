@@ -4,7 +4,7 @@
 [program:celerybeat]
 
 ; Set full path to celery program if using virtualenv
-command=/srv/venv/bin/celery beat -A mbi --schedule /srv/celerybeat.db --loglevel=INFO
+command=celery beat -A {{ celery_project_name }} --schedule /srv/celerybeat.db --loglevel=INFO
 
 ; The directory to your Django project
 directory=/srv

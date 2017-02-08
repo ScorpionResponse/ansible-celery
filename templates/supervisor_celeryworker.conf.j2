@@ -5,7 +5,7 @@
 [program:celeryworker]
 
 ; Set full path to celery program if using virtualenv
-command=/srv/venv/bin/celery worker -A mbi --loglevel=INFO
+command=celery worker -A {{ celery_project_name }} --loglevel=INFO
 
 ; The directory to your Django project
 directory=/srv

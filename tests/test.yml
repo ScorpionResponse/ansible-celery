@@ -1,4 +1,6 @@
 ---
 - hosts: all
+  vars:
+    - celery_project_name: default
   roles:
     - role_under_test
