@@ -1,5 +1,10 @@
 ---
-- name: restart celery
+- name: restart celeryworker
   supervisorctl: 
-    name: celery
+    name: celeryworker
+    state: restarted
+
+- name: restart celerybeat
+  supervisorctl: 
+    name: celerybeat
     state: restarted
