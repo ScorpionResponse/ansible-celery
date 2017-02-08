@@ -52,7 +52,8 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Test results of role
-  #- 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm which celery'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm which celery'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm pip list'
 
 after_success:
   # Clean up.
