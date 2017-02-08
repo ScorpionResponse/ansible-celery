@@ -1,0 +1,5 @@
+---
+- name: restart celery
+  supervisorctl: 
+    name: celery
+    state: restarted

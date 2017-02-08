@@ -1,0 +1,43 @@
+---
+- name: Install Celery
+  pip:
+    name: Celery
+    state: present
+
+- name: Create Group for celery
+  group:
+    name: "{{ celery_group_name }}"
+    system: yes
+    state: present
+
+- name: Create User for celery
+  user:
+    name: "{{ celery_user_name }}"
+    groups: "{{ celery_group_name }},www-data"
+    append: yes
+
+- name: Create celery log directory
+  file:
+    path: "{{ celery_log_dir }}"
+    state: directory
+    owner: "{{ celery_user_name }}"
+    group: "www-data"
+    mode: 0775
+
+- name: Install celeryworker supervisord script
+  template: 
+    src: supervisor_celeryworker.conf.j2
+    dest: "{{ supervisord_config_dir }}/conf.d/celeryworker.conf" 
+    owner: "{{ supervisord_user_name }}"
+    group: "{{ supervisord_group_name }}"
+    mode: 0777 
+  notify: restart celeryworker
+
+- name: Install celerybeat supervisord script
+  template: 
+    src: supervisor_celerybeat.conf.j2
+    dest: "{{ supervisord_config_dir }}/conf.d/celerybeat.conf" 
+    owner: "{{ supervisord_user_name }}"
+    group: "{{ supervisord_group_name }}"
+    mode: 0777 
+  notify: restart celerybeat

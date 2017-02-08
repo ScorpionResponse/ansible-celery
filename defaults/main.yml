@@ -1,0 +1,6 @@
+---
+
+celery_log_dir: "/var/log/celery"
+
+celery_user_name: celery
+celery_group_name: celery
