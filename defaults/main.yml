@@ -2,6 +2,7 @@
 celery_project_name: 
 
 celery_project_dir: "/var/lib/celery"
+celery_bin_dir: 
 
 celery_log_dir: "/var/log/celery"
 

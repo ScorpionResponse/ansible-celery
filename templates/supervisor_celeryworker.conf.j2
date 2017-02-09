@@ -4,9 +4,9 @@
 
 [program:celeryworker]
 {% if celery_project_name %}
-command=celery worker -A {{ celery_project_name }} --loglevel=INFO
+command={{ celery_bin_dir }}celery worker -A {{ celery_project_name }} --loglevel=INFO
 {% else %}
-command=celery worker --loglevel=INFO
+command={{ celery_bin_dir }}celery worker --loglevel=INFO
 {% endif %}
 
 directory={{ celery_project_dir }}
