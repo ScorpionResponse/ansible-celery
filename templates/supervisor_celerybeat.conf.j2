@@ -1,41 +1,23 @@
 ; ===============================
 ;  celery beat supervisor config
 ; ===============================
+
 [program:celerybeat]
+{% if celery_project_name %}
+command=celery beat -A {{ celery_project_name }} --schedule /var/lib/celery/celerybeat.db --loglevel=INFO
+{% else %}
+command=celery beat --schedule /var/lib/celery/celerybeat.db --loglevel=INFO
+{% endif %}
 
-; Set full path to celery program if using virtualenv
-command=celery beat -A {{ celery_project_name }} --schedule /srv/celerybeat.db --loglevel=INFO
-
-; The directory to your Django project
-directory=/srv
-
-; If supervisord is run as the root user, switch users to this UNIX user account
-; before doing any processing.
+directory={{ celery_project_dir }}
 user={{ celery_user_name }}
 
-; Supervisor will start as many instances of this program as named by numprocs
 numprocs=1
 
-; Put process stdout output in this file
 stdout_logfile={{ celery_log_dir }}/beat.log
-
-; Put process stderr output in this file
 stderr_logfile={{ celery_log_dir }}/beat.log
 
-; If true, this program will start automatically when supervisord is started
 autostart=true
-
-; May be one of false, unexpected, or true. If false, the process will never
-; be autorestarted. If unexpected, the process will be restart when the program
-; exits with an exit code that is not one of the exit codes associated with this
-; process’ configuration (see exitcodes). If true, the process will be
-; unconditionally restarted when it exits, without regard to its exit code.
 autorestart=true
-
-; The total number of seconds which the program needs to stay running after
-; a startup to consider the start successful.
 startsecs=10
-
-; if your broker is supervised, set its priority higher
-; so it starts first
 priority=999

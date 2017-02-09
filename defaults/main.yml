@@ -1,6 +1,8 @@
 ---
 celery_project_name: 
 
+celery_project_dir: "/var/lib/celery"
+
 celery_log_dir: "/var/log/celery"
 
 celery_user_name: celery

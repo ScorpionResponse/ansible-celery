@@ -24,6 +24,14 @@
     group: "www-data"
     mode: 0775
 
+- name: Create celery lib directory
+  file:
+    path: "/var/lib/celery"
+    state: directory
+    owner: "{{ celery_user_name }}"
+    group: "www-data"
+    mode: 0775
+
 - name: Install celeryworker supervisord script
   template: 
     src: supervisor_celeryworker.conf.j2
