@@ -53,7 +53,7 @@ script:
 
   # Test results of role
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm which celery'
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm pip list'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ps aux | grep "[c]elery"'
 
 after_success:
   # Clean up.
