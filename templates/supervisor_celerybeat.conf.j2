@@ -4,7 +4,7 @@
 
 [program:celerybeat]
 {% if celery_project_name %}
-command={{ celery_bin_dir }}celery beat -A {{ celery_project_name }} --schedule /var/lib/celery/celerybeat.db --pidfile= --loglevel=INFO
+command={{ celery_bin_dir }}celery beat -A {{ celery_project_name }} --pidfile= --loglevel=INFO
 {% else %}
 command={{ celery_bin_dir }}celery beat --schedule /var/lib/celery/celerybeat.db --pidfile= --loglevel=INFO
 {% endif %}
