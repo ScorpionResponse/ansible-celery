@@ -1,9 +1,9 @@
 Ansible Role: celery
-======================
+====================
 
 [![Build Status](https://travis-ci.org/ScorpionResponse/ansible-celery.svg?branch=master)](https://travis-ci.org/ScorpionResponse/ansible-celery)
 
-Ansible role to install celery.
+Ansible role to install Celery.
 
 Requirements
 ------------
