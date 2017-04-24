@@ -1,8 +1,25 @@
 ---
+- name: Set facts for python3
+  set_fact:
+    pip_executable: "pip3"
+    python_executable: "python3"
+  when: "use_python3|bool"
+
+- name: Set facts for python2
+  set_fact:
+    pip_executable: "pip2"
+    python_executable: "python2"
+  when: "not use_python3|bool"
+
+- name: Show use_python3 and pip_executable
+  debug:
+    msg: "Use Python3: {{ use_python3 }}; Pip Exe: {{ pip_executable }}; Python Exe: {{ python_executable }}"
+
 - name: Install Celery
   pip:
     name: Celery
     state: present
+    executable: "{{ pip_executable }}"
 
 - name: Create Group for celery
   group:
